@@ -1,0 +1,10 @@
+first_join: "&fWelcome &e<player>&f to this server!"
+welcome: "&fPlayer &e<player>&f joined the game"
+
+
+heal_player: "&fHealed you." # <player>
+heal_player_other_sender: "&fHealed player &e<player>&f." # <player>, <sender>
+heal_player_other_player: "&fPlayer &e<sender>&f teleported you to spawn." # <player>, <sender>
+move_to_spawn: "&fTeleported you to spawn." #  <player>
+move_to_spawn_other_sender: "&fTeleported player &e<player>&f to spawn." # <player>, <sender>
+move_to_spawn_other_player: "&fPlayer &e<sender>&f teleported you to spawn." # <player>, <sender>

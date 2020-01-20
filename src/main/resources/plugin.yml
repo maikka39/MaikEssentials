@@ -1,0 +1,52 @@
+name: MaikEssentials
+version: "0.0.1"
+authors: [maik_dev]
+website: "https://minecraftplugins.maik.dev/"
+description: "My TestPlugin"
+
+main: dev.maik.minecraftplugins.maikessentials.MaikEssentials
+
+softdepend: [ Permissions, PermissionEx, bPermissions, PermissionsBukkit, GroupManager, LuckPerms ]
+api-version: "1.15"
+
+commands:
+  fly:
+    description: Allows you to fly
+    permission: maikessentials.fly
+    usage: |
+      /<command> - toggles fly
+      /<command> [player] - toggles fly for [player]
+
+  heal:
+    description: Heals a player
+    permission: maikessentials.heal
+    usage: |
+      /<command> - heals player
+      /<command> [player] - heals [player]
+  spawn:
+    description: Moves a player to spawn.
+    permission: maikessential.spawn
+    usage: |
+      /<command> - moves player to spawn
+      /<command> [player] - moves [player] to spawn
+
+permissions:
+  maikessentials.*:
+    description: Gives access to all maikessentials functions.
+    children:
+      - maikessentials.fly.self
+      - maikessentials.fly.others
+      - maikessentials.heal.self
+      - maikessentials.heal.others
+  maikessentials.fly.self:
+    description: Allows /fly (on self)
+    default: op
+  maikessentials.fly.others:
+    description: Allows /fly <player>
+    default: op
+  maikessentials.heal.self:
+    description: Allows /heal (on self)
+    default: op
+  maikessentials.heal.others:
+    description: Allows /heal <player>
+    default: op
