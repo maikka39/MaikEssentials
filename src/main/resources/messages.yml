@@ -1,6 +1,7 @@
 first_join: "&fWelcome &e<player>&f to this server!"
 welcome: "&fPlayer &e<player>&f joined the game"
 
+no_permission: "&cYou do not have permission to use this command!"
 
 heal_player: "&fHealed you." # <player>
 heal_player_other_sender: "&fHealed player &e<player>&f." # <player>, <sender>

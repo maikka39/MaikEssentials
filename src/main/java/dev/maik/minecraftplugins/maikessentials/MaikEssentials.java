@@ -4,28 +4,35 @@ import dev.maik.minecraftplugins.maikessentials.commands.EssentialsCommand;
 import dev.maik.minecraftplugins.maikessentials.entitys.CommandSourceEntity;
 import dev.maik.minecraftplugins.maikessentials.entitys.UserEntity;
 import dev.maik.minecraftplugins.maikessentials.listeners.JoinListener;
+import dev.maik.minecraftplugins.maikessentials.utils.ChatUtil;
+import dev.maik.minecraftplugins.maikessentials.utils.ConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.annotation.Nonnull;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MaikEssentials extends JavaPlugin {
     public static final boolean DEBUG = true;
+    private FileConfiguration messages;
 
     @Override
     public void onEnable() {
         // Make me op
         Player p = Bukkit.getPlayer(UUID.fromString("57fd33e5-5c18-437c-9fdf-d30a5a091cbf"));
         if (p != null) p.setOp(true);
+
+        // Preload config files
+        ConfigUtil configUtil = new ConfigUtil(this);
+        configUtil.loadConfig(new String[]{"messages.yml", "config.yml"});
+
+        messages = configUtil.loadConfig("messages.yml");
 
         new JoinListener(this);
     }
@@ -48,7 +55,9 @@ public class MaikEssentials extends JavaPlugin {
 
         // Check authorization
         if (userEntity != null && !userEntity.isAuthorized(cmd)) {
-            userEntity.sendMessage("noAccessCommand"); // TODO: Import some string from config
+            userEntity.sendMessage(ChatUtil.convert(messages.getString("no_permission"), Map.of(
+                    "player", userEntity.getPlayer().getDisplayName()
+            )));
             return true;
         }
 

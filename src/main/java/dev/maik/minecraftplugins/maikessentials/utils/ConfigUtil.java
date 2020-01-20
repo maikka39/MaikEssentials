@@ -15,7 +15,14 @@ public class ConfigUtil {
         this.plugin = plugin;
     }
 
+    public void loadConfig(String[] names) {
+        for (String name : names) {
+            loadConfig(name);
+        }
+    }
+
     public FileConfiguration loadConfig(String name) {
+        plugin.getLogger().info("Load " + name); // TODO: Don't load config every time
         File mainConfigFile = new File(plugin.getDataFolder(), name);
         FileConfiguration mainConfig = new YamlConfiguration();
 
@@ -46,8 +53,6 @@ public class ConfigUtil {
 
             out.close();
             in.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
