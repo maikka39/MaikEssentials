@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 
 public class MaikEssentials extends JavaPlugin {
     public static final boolean DEBUG = true;
-    private FileConfiguration messages;
+    private ConfigUtil configUtil;
+    private final HashMap<String, FileConfiguration> configMap = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -29,10 +30,12 @@ public class MaikEssentials extends JavaPlugin {
         if (p != null) p.setOp(true);
 
         // Preload config files
-        ConfigUtil configUtil = new ConfigUtil(this);
-        configUtil.loadConfig(new String[]{"messages.yml", "config.yml"});
+        configUtil = new ConfigUtil(this);
 
-        messages = configUtil.loadConfig("messages.yml");
+        HashSet<String> configFiles = new HashSet<>();
+        configFiles.add("messages.yml");
+        configFiles.add("config.yml");
+        reloadConfigs(configFiles);
 
         new JoinListener(this);
     }
@@ -55,7 +58,7 @@ public class MaikEssentials extends JavaPlugin {
 
         // Check authorization
         if (userEntity != null && !userEntity.isAuthorized(cmd)) {
-            userEntity.sendMessage(ChatUtil.convert(messages.getString("no_permission"), Map.of(
+            userEntity.sendMessage(ChatUtil.convert(getConfig("messages.yml").getString("no_permission"), Map.of(
                     "player", userEntity.getPlayer().getDisplayName()
             )));
             return true;
@@ -120,5 +123,33 @@ public class MaikEssentials extends JavaPlugin {
 
     public Iterable<UserEntity> getOnlineUsers() {
         return getOnlinePlayers().stream().map(UserEntity::new).collect(Collectors.toList());
+    }
+
+    public void reloadConfigs() {
+        reloadConfigs(configMap.keySet());
+    }
+
+    public void reloadConfigs(Set<String> names) {
+        getLogger().info("Reloading config files " + String.valueOf(names));
+        for (String name : names) {
+            getConfig(name);
+        }
+    }
+
+    public FileConfiguration getConfig(String name) {
+        return getConfig(name, false);
+    }
+
+    public FileConfiguration getConfig(String name, boolean reload) {
+        if (!configMap.containsKey(name) || reload) {
+            try {
+                configMap.put(name, configUtil.loadConfig(name));
+            } catch (Exception e) {
+                getLogger().warning("Couldn't load config file " + name);
+                e.printStackTrace();
+            }
+        }
+
+        return configMap.get(name);
     }
 }

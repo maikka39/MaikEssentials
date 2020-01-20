@@ -3,8 +3,6 @@ package dev.maik.minecraftplugins.maikessentials.commands;
 import dev.maik.minecraftplugins.maikessentials.entitys.CommandSourceEntity;
 import dev.maik.minecraftplugins.maikessentials.entitys.UserEntity;
 import dev.maik.minecraftplugins.maikessentials.utils.ChatUtil;
-import dev.maik.minecraftplugins.maikessentials.utils.ConfigUtil;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
@@ -14,15 +12,8 @@ import java.util.Map;
 
 @SuppressWarnings("unused")
 public class SpawnCommand extends EssentialsCommand {
-    private FileConfiguration messages;
-
     public SpawnCommand() {
         super("spawn");
-    }
-
-    @Override
-    public void onLoad() {
-        messages = new ConfigUtil(getPlugin()).loadConfig("messages.yml");
     }
 
     @Override
@@ -35,7 +26,7 @@ public class SpawnCommand extends EssentialsCommand {
             case 0: {
                 spawnPlayer(userEntity);
 
-                userEntity.sendMessage(ChatUtil.convert(messages.getString("moved_to_spawn"), Map.of(
+                userEntity.sendMessage(ChatUtil.convert(getPlugin().getConfig("messages.yml").getString("moved_to_spawn"), Map.of(
                         "player", userEntity.getPlayer().getDisplayName()
                 )));
                 break;
@@ -49,12 +40,12 @@ public class SpawnCommand extends EssentialsCommand {
 
                 spawnPlayer(receiver);
 
-                userEntity.sendMessage(ChatUtil.convert(messages.getString("move_to_spawn_other_sender"), Map.of(
+                userEntity.sendMessage(ChatUtil.convert(getPlugin().getConfig("messages.yml").getString("move_to_spawn_other_sender"), Map.of(
                         "player", receiver.getPlayer().getDisplayName(),
                         "sender", userEntity.getPlayer().getDisplayName()
                 )));
 
-                receiver.sendMessage(ChatUtil.convert(messages.getString("move_to_spawn_other_player"), Map.of(
+                receiver.sendMessage(ChatUtil.convert(getPlugin().getConfig("messages.yml").getString("move_to_spawn_other_player"), Map.of(
                         "player", receiver.getPlayer().getDisplayName(),
                         "sender", userEntity.getPlayer().getDisplayName()
                 )));

@@ -3,9 +3,7 @@ package dev.maik.minecraftplugins.maikessentials.commands;
 import dev.maik.minecraftplugins.maikessentials.entitys.CommandSourceEntity;
 import dev.maik.minecraftplugins.maikessentials.entitys.UserEntity;
 import dev.maik.minecraftplugins.maikessentials.utils.ChatUtil;
-import dev.maik.minecraftplugins.maikessentials.utils.ConfigUtil;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
@@ -16,15 +14,8 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public class HealCommand extends EssentialsCommand {
-    private FileConfiguration messages;
-
     public HealCommand() {
         super("heal");
-    }
-
-    @Override
-    public void onLoad() {
-        messages = new ConfigUtil(getPlugin()).loadConfig("messages.yml");
     }
 
     @Override
@@ -40,7 +31,7 @@ public class HealCommand extends EssentialsCommand {
 
         healPlayer(userEntity);
 
-        userEntity.sendMessage(ChatUtil.convert(messages.getString("heal_player"), Map.of(
+        userEntity.sendMessage(ChatUtil.convert(getPlugin().getConfig("messages.yml").getString("heal_player"), Map.of(
                 "player", userEntity.getPlayer().getDisplayName()
         )));
     }
