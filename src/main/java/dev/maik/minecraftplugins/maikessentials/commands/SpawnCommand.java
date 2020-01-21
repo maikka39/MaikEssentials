@@ -26,7 +26,7 @@ public class SpawnCommand extends EssentialsCommand {
             case 0: {
                 spawnPlayer(userEntity);
 
-                userEntity.sendMessage(ChatUtil.convert(getPlugin().getConfig("messages.yml").getString("moved_to_spawn"), Map.of(
+                userEntity.sendMessage(ChatUtil.convert(getPlugin().getConfig("messages.yml").getString("move_to_spawn"), Map.of(
                         "player", userEntity.getPlayer().getDisplayName()
                 )));
                 break;
