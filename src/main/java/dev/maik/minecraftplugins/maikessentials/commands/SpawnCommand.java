@@ -32,7 +32,7 @@ public class SpawnCommand extends EssentialsCommand {
                 break;
             }
             case 1: {
-                if (!userEntity.isAuthorized("essentials.spawn.others")) {
+                if (!userEntity.isAuthorized("maikessentials.spawn.others")) {
                     return;
                 }
 
@@ -67,7 +67,7 @@ public class SpawnCommand extends EssentialsCommand {
 
     @Override
     protected List<String> getTabCompleteOptions(final UserEntity userEntity, final String commandAlias, final String[] args) {
-        if (args.length == 1 && userEntity.isAuthorized("essentials.spawn.others")) {
+        if (args.length == 1 && userEntity.isAuthorized("maikessentials.spawn.others")) {
             return getPlayers(userEntity);
         }
 

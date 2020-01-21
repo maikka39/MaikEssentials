@@ -24,7 +24,7 @@ public class HealCommand extends EssentialsCommand {
 //            userEntity.healCooldown();
 //        }
 
-//        if (commandArgs.length > 0 && userEntity.isAuthorized("essentials.heal.others")) {
+//        if (commandArgs.length > 0 && userEntity.isAuthorized("maikessentials.heal.others")) {
 //            loopOnlinePlayers(userEntity.getSource(), true, true, args[0], null);
 //            return;
 //        }
@@ -53,7 +53,7 @@ public class HealCommand extends EssentialsCommand {
 
     @Override
     protected List<String> getTabCompleteOptions(final UserEntity userEntity, final String commandAlias, final String[] args) {
-        if (args.length == 1 && userEntity.isAuthorized("essentials.heal.others")) {
+        if (args.length == 1 && userEntity.isAuthorized("maikessentials.heal.others")) {
             return getPlayers(userEntity);
         }
 
