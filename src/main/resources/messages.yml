@@ -9,3 +9,5 @@ heal_player_other_player: "&fPlayer &e<sender>&f teleported you to spawn." # <pl
 move_to_spawn: "&fTeleported you to spawn." #  <player>
 move_to_spawn_other_sender: "&fTeleported player &e<player>&f to spawn." # <player>, <sender>
 move_to_spawn_other_player: "&fPlayer &e<sender>&f teleported you to spawn." # <player>, <sender>
+
+enchant_item: "&fEnchanted item &e<item>&f from player &e<player>&f"

@@ -15,20 +15,26 @@ commands:
     permission: maikessentials.fly
     usage: |
       /<command> - toggles fly
-      /<command> [player] - toggles fly for [player]
+      /<command> [<player>] - toggles fly for [player]
 
   heal:
     description: Heals a player
     permission: maikessentials.heal
     usage: |
       /<command> - heals player
-      /<command> [player] - heals [player]
+      /<command> [<player>] - heals player
   spawn:
     description: Moves a player to spawn.
     permission: maikessential.spawn
     usage: |
       /<command> - moves player to spawn
-      /<command> [player] - moves [player] to spawn
+      /<command> [<player>] - moves player to spawn
+  enchant:
+    description: Enchants an item.
+    permission: maikessential.enchant
+    usage: |
+      /<command> <enchantment> [<level>] - Enchants the item currently in your hand
+
 
 permissions:
   maikessentials.*:
@@ -50,3 +56,7 @@ permissions:
   maikessentials.heal.others:
     description: Allows /heal <player>
     default: op
+maikessentials.enchant:
+  description: Allows /enchant
+  default: op
+
